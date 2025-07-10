@@ -1,11 +1,9 @@
 import React, { useRef } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 
 const ITEM_TYPE = 'TASK';
 
 export default function TaskCard({ task, onDrop, onClick, onEditTask, onDeleteTask }) {
-  const cardRef = useRef();
-
   // Drag source
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,

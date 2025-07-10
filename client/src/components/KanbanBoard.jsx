@@ -570,7 +570,7 @@ export default function KanbanBoard() {
   const [lastDeletedTask, setLastDeletedTask] = useState(null);
   const [undoTimeout, setUndoTimeout] = useState(null);
   const [showForbiddenAdmin, setShowForbiddenAdmin] = useState(false);
-  const [forbiddenWords, setForbiddenWords] = useState(getForbiddenWords());
+  const [forbiddenWords] = useState(getForbiddenWords());
   // Remove updateForbiddenWords, use setForbiddenWords directly where needed
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
