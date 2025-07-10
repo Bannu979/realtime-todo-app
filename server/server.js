@@ -39,14 +39,9 @@ app.get('/', (req, res) => {
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
-app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/logs', logRoutes);
-
-// Catch-all route for unmatched paths
-app.use('*', (req, res) => {
-  res.status(200).json({ message: 'Welcome to the Realtime Todo App API. Please use the /api endpoints.' });
-});
+app.use('/auth', authRoutes);
+app.use('/tasks', taskRoutes);
+app.use('/logs', logRoutes);
 
 // Only listen if not running in Vercel serverless
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
