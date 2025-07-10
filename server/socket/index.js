@@ -1,6 +1,7 @@
 let io;
 
 function initSocket(server) {
+  if (!server) return; // No-op for serverless (Vercel)
   const { Server } = require('socket.io');
   io = new Server(server, {
     cors: {

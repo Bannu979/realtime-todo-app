@@ -11,14 +11,20 @@ const logRoutes = require('./routes/logRoutes');
 dotenv.config();
 
 const app = express();
-const httpServer = http.createServer(app);
-initSocket(httpServer);
 
-app.use(cors());
+// Use CORS with allowed origins for production
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:3000',
+];
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGODB_URI;
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -35,6 +41,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/logs', logRoutes);
 
-httpServer.listen(PORT, () => {
+// Only listen if not running in Vercel serverless
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  const httpServer = http.createServer(app);
+  initSocket(httpServer);
+  httpServer.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-}); 
+  });
+}
+
+module.exports = app; 
