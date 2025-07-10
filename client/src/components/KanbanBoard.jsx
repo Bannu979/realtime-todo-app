@@ -115,7 +115,7 @@ function EditTaskModal({ open, onClose, task }) {
   const [deleting, setDeleting] = useState(false);
   const [smartAssigning, setSmartAssigning] = useState(false);
   const [conflict, setConflict] = useState(null);
-  const [forbiddenWords, setForbiddenWords] = useState(getForbiddenWords());
+  const [forbiddenWords] = useState(getForbiddenWords());
 
   useEffect(() => {
     setTitle(task?.title || '');
@@ -570,7 +570,7 @@ export default function KanbanBoard() {
   const [lastDeletedTask, setLastDeletedTask] = useState(null);
   const [undoTimeout, setUndoTimeout] = useState(null);
   const [showForbiddenAdmin, setShowForbiddenAdmin] = useState(false);
-  const [forbiddenWords, setForbiddenWords] = useState(getForbiddenWords());
+  const [forbiddenWords] = useState(getForbiddenWords());
   // Remove updateForbiddenWords, use setForbiddenWords directly where needed
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -1103,7 +1103,7 @@ export default function KanbanBoard() {
         </div>
         <Toast message={toast.message} show={toast.show} undo={toast.undo} onUndo={handleUndoDelete} />
         <ConfettiBurst show={confetti} />
-        <ForbiddenWordsAdmin open={showForbiddenAdmin} onClose={() => setShowForbiddenAdmin(false)} words={forbiddenWords} setWords={setForbiddenWords} />
+        <ForbiddenWordsAdmin open={showForbiddenAdmin} onClose={() => setShowForbiddenAdmin(false)} words={forbiddenWords} />
       </DndProvider>
     </>
   );
