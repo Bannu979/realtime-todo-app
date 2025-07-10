@@ -37,6 +37,8 @@ app.get('/', (req, res) => {
     res.send('Real-Time Collaborative To-Do Board API');
 });
 
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/logs', logRoutes);
